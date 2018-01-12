@@ -42,6 +42,18 @@ services:
     depends_on:
       - elasticsearch
 
+  apm-server:
+    build:
+      context: apm/
+    volumes:
+      - ./apm/config/:/usr/share/apm-server/config:ro
+    ports:
+      - "8200:8200"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
 networks:
 
   elk:

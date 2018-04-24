@@ -1,10 +1,8 @@
-version: '2'
+version: '2.3'
 
 services:
-
   elasticsearch:
-    build:
-      context: elasticsearch/
+    image: docker.elastic.co/elasticsearch/elasticsearch-basic:6.2.3
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -17,8 +15,7 @@ services:
       - elk
 
   logstash:
-    build:
-      context: logstash/
+    image: docker.elastic.co/logstash/logstash-x-pack:6.2.3
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -32,8 +29,7 @@ services:
       - elasticsearch
 
   kibana:
-    build:
-      context: kibana/
+    image: docker.elastic.co/kibana/kibana-x-pack:6.2.3
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -44,8 +40,7 @@ services:
       - elasticsearch
 
   apm-server:
-    build:
-      context: apm/
+    image: docker.elastic.co/apm/apm-server:6.2.3
     volumes:
       - ./apm/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
     ports:
@@ -58,6 +53,5 @@ services:
       - DEBUG=elastic-apm
 
 networks:
-
   elk:
     driver: bridge

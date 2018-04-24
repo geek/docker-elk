@@ -1,7 +1,7 @@
-FROM centos:7
+FROM docker.elastic.co/apm/apm-server:6.2.3
 
 ENV APM_HOME /usr/share/apm-server
-ENV APM_VERSION 6.1.1
+ENV APM_VERSION 6.2.3
 ENV ELASTIC_CONTAINER false
 ENV PATH ${APM_HOME}:$PATH
 
